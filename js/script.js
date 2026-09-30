@@ -48,3 +48,38 @@ closeMenu.addEventListener("click", () => {
 });
 
 
+
+//search food by name
+ let searchInput=document.getElementById('searchInput');
+    let mealsContainer=document.getElementById('mealsContainer');
+    let searchBtn=document.getElementById('searchBtn');
+    let meals_section=document.querySelector('.meals-section ');
+
+    let mealDetails=document.getElementById('mealDetails');
+    let meal_details_section=document.querySelector('.meal-details-section');
+    searchBtn.addEventListener('click',async ()=>{
+        let foodname=searchInput.value;
+        console.log(foodname)
+
+        let response= await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${foodname}`)
+        let data=await response.json();
+        console.log(data);
+        mealsContainer.innerHTML = "";
+        meals_section.style.display="block";
+         data.meals.forEach(meal => {
+
+     
+            mealsContainer.innerHTML += `
+    <div class="meal-card" onclick="getMealDetails('${meal.idMeal}')">
+
+        <img src="${meal.strMealThumb}" alt="${meal.strMeal}">
+
+        <h3>${meal.strArea}</h3>
+
+        <p>${meal.strMeal}</p>
+
+    </div>
+`;
+    });
+   
+    })
