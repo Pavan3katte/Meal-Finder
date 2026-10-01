@@ -136,3 +136,133 @@ async function getmealdetails(categories) {
 
     });
 }
+
+ //when i click food the food id should prints   
+
+   async function getMealDetails(id) {
+
+    // meal details API
+    let response = await fetch(
+        `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`
+    );
+
+    let data = await response.json();
+
+    let meal = data.meals[0];
+
+    // Hide meal cards
+    meals_section.style.display = "none";
+
+   meal_details_section.style.display="block";
+    // Show meal name in breadcrumb
+    document.getElementById("breadcrumbMeal").innerText = meal.strMeal;
+
+
+    // Create ingredients
+    let ingredients = "";
+
+for (let i = 1; i <= 20; i++) {
+
+    let ingredient = meal[`strIngredient${i}`];
+
+    if (ingredient && ingredient.trim() !== "") {
+
+        ingredients += `
+            <div class="ingredient">
+                <span class="ingredient-number">${i}</span>
+                ${ingredient}
+            </div>
+        `;
+    }
+}
+
+
+    // Create measurements
+    let measurements = "";
+
+for (let i = 1; i <= 20; i++) {
+
+    let ingredient = meal[`strIngredient${i}`];
+    let measure = meal[`strMeasure${i}`];
+
+    if (ingredient && ingredient.trim() !== "") {
+
+        measurements += `
+            <div class="measurement">
+                <i class="fa-solid fa-spoon"></i>
+                ${measure}
+            </div>
+        `;
+    }
+}
+
+
+    // Display everything
+    mealDetails.innerHTML = `
+
+        <div class="meal-top">
+
+            <div class="meal-img">
+                <img src="${meal.strMealThumb}">
+            </div>
+
+
+            <div class="meal-info">
+
+                <h1>${meal.strMeal}</h1>
+
+                <p>
+                    <strong>Category:</strong>
+                    ${meal.strCategory}
+                </p>
+
+                <p>
+                    <strong>Area:</strong>
+                    ${meal.strArea}
+                </p>
+                
+                <p>
+        <strong>Source:</strong>
+        ${meal.strSource || "Not available"}
+    </p>
+                <p>
+                    <strong>Tags:</strong>
+                    ${meal.strTags || "No tags"}
+                </p>
+
+
+                <div class="ingredients-box">
+
+                    <h3>INGREDIENTS</h3>
+
+<div class="ingredients">
+    ${ingredients}
+</div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+       
+
+<h3 class="measure-title">Measure:</h3>
+
+<div class="measurements">
+    ${measurements}
+</div>
+
+
+        <h2 class="instructions-title">
+            instructions:
+        </h2>
+
+        <div class="instructions">
+            ${meal.strInstructions}
+        </div>
+
+    `;
+}
+
