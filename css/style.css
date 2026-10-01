@@ -29,17 +29,34 @@
             color: white;
             font-size: 30px;
         }
-        .hero{
-            background-image: url("https://images.unsplash.com/photo-1498837167922-ddd27525d352");
-            background-size: cover;
-            height: 440px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            justify-content: center;
-            color: white;
-        }
+        .hero {
+    position: relative;
+    background-image: url(../images/banner.jpeg);
+    background-size: cover;
+    background-position: center;
+    height: 440px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    color: white;
+}
+
+/* Black shade */
+.hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+}
+
+
+.hero > * {
+    position: relative;
+    z-index: 1;
+}
 
         .hero h2 {
     font-size: 36px;
