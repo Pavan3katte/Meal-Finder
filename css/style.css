@@ -313,3 +313,85 @@
 .meal-info strong {
     margin-right: 8px;
 }
+
+
+.ingredients-box {
+    background: rgb(238, 91, 24);
+    color: white;
+    padding: 18px;
+    margin-top: 25px;
+}
+
+
+
+.ingredients-box h3 {
+    margin-bottom: 15px;
+}
+
+.ingredients {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+
+    
+}
+
+.ingredient {
+    font-size: 17px;
+    font-weight: 100;
+}
+
+.ingredient-number{
+    color:white;
+    background-color: green;
+    padding: 4px;
+    border: 1px solid white;
+    border-radius: 50%;
+}
+
+.measure-title {
+    margin-top: 40px;
+    margin-bottom: 10px;
+}
+
+.measurements {
+    border: 1px solid #ddd;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+.measurement i{
+    color: #f15b20;
+}
+
+.instructions-title {
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+
+.instructions {
+    line-height: 1.7;
+    font-size: 14px;
+}
+
+/*category description*/
+.category-info-section {
+    display: none;
+    margin: 30px 30px 50px;
+    padding: 18px 15px;
+    border: 1px solid rgb(238, 91, 24);
+    background: white;
+}
+
+.category-info-section h2 {
+    color: rgb(238, 91, 24);
+    font-size: 18px;
+    margin-bottom: 12px;
+}
+
+.category-info-section p {
+    color: #666;
+    font-size: 13px;
+    line-height: 1.7;
+}
