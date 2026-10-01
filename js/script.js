@@ -83,3 +83,56 @@ closeMenu.addEventListener("click", () => {
     });
    
     })
+
+
+    
+let categoryInfo = document.getElementById("categoryInfo");
+let categoryName = document.getElementById("categoryName");
+let categoryDescription = document.getElementById("categoryDescription");
+async function getmealdetails(categories) {
+
+    mealsContainer.innerHTML = "";
+
+    // Get category information
+    let categoryResponse = await fetch(
+        "https://www.themealdb.com/api/json/v1/1/categories.php"
+    );
+
+    let categoryData = await categoryResponse.json();
+
+    let category = categoryData.categories.find(
+        value => value.strCategory === categories
+    );
+
+    categoryName.innerText = category.strCategory;
+
+    categoryDescription.innerText = category.strCategoryDescription;
+
+    categoryInfo.style.display = "block";
+
+
+    // Get meals
+    let response = await fetch(
+        `https://www.themealdb.com/api/json/v1/1/filter.php?c=${categories}`
+    );
+
+    let data = await response.json();
+
+    meals_section.style.display = "block";
+
+    data.meals.forEach((value) => {
+
+        mealsContainer.innerHTML += `
+            <div class="meal-card" onclick="getMealDetails('${value.idMeal}')">
+
+                <img src="${value.strMealThumb}">
+
+                <h3>${categories}</h3>
+
+                <p>${value.strMeal}</p>
+
+            </div>
+        `;
+
+    });
+}
